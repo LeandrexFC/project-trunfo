@@ -40,7 +40,6 @@ class Card extends Component {
             Super Trunfo
           </p>
         )}
-
       </>
     );
   }
