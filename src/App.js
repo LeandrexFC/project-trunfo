@@ -14,7 +14,6 @@ class App extends React.Component {
     cardTrunfo: false,
     savedCardName: [],
     hasTrunfo: false,
-    btnChecked: false,
   };
 
   onInputChange = (event) => {
@@ -22,7 +21,7 @@ class App extends React.Component {
     const value = type === 'checkbox' ? checked : event.target.value;
     this.setState({
       [name]: value,
-      btnChecked: checked,
+      hasTrunfo: checked,
     });
   };
 
@@ -50,8 +49,7 @@ class App extends React.Component {
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
-    const { cardName, btnChecked } = this.state;
-    const isChecked = !btnChecked;
+    const { cardName, hasTrunfo } = this.state;
     this.setState((prevState) => ({
       savedCardName: [...prevState.savedCardName, cardName],
       cardName: '',
@@ -61,7 +59,7 @@ class App extends React.Component {
       cardAttr2: 0,
       cardAttr3: 0,
       cardRare: '',
-      hasTrunfo: isChecked,
+      hasTrunfo,
     }));
   };
 
