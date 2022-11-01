@@ -34,17 +34,17 @@ class App extends React.Component {
     const maxValue = 210;
     const totalSum = parseInt(cardAttr1, 10)
     + parseInt(cardAttr2, 10)
-    + parseInt(cardAttr3, 10) > maxValue;
+    + parseInt(cardAttr3, 10) <= maxValue;
     const maxAttr = 90;
     const minAttr = -1;
-    const maxAttr01 = parseInt(cardAttr1, 10) >= maxAttr;
-    const maxAttr02 = parseInt(cardAttr2, 10) >= maxAttr;
-    const maxAttr03 = parseInt(cardAttr3, 10) >= maxAttr;
-    const minAttr01 = parseInt(cardAttr1, 10) < minAttr;
-    const minAttr02 = parseInt(cardAttr2, 10) < minAttr;
-    const minAttr03 = parseInt(cardAttr3, 10) < minAttr;
+    const maxAttr01 = parseInt(cardAttr1, 10) <= maxAttr;
+    const maxAttr02 = parseInt(cardAttr2, 10) <= maxAttr;
+    const maxAttr03 = parseInt(cardAttr3, 10) <= maxAttr;
+    const minAttr01 = parseInt(cardAttr1, 10) > minAttr;
+    const minAttr02 = parseInt(cardAttr2, 10) > minAttr;
+    const minAttr03 = parseInt(cardAttr3, 10) > minAttr;
 
-    return !totalSum && !cardsName && maxAttr01
+    return totalSum && cardsName && maxAttr01
     && maxAttr02 && maxAttr03 && minAttr01 && minAttr02 && minAttr03;
   };
 
