@@ -13,7 +13,7 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     savedCardName: [],
-    hasTrunfo: true,
+    hasTrunfo: false,
     btnChecked: false,
   };
 
@@ -83,7 +83,7 @@ class App extends React.Component {
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
             hasTrunfo={ hasTrunfo }
-            isSaveButtonDisabled={ this.validateForm() }
+            isSaveButtonDisabled={ !this.validateForm() }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
           <Card

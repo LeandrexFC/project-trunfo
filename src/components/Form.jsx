@@ -87,7 +87,7 @@ class Form extends Component {
             </select>
           </label>
 
-          { hasTrunfo ? (
+          { !hasTrunfo ? (
             <label htmlFor="trunfo">
               Super Trybe Trunfo
               <input
@@ -102,7 +102,7 @@ class Form extends Component {
           <button
             type="button"
             data-testid="save-button"
-            disabled={ !isSaveButtonDisabled }
+            disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
           >
             Salvar
