@@ -13,6 +13,8 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     savedCardName: [],
+    hasTrunfo: true,
+    btnChecked: false,
   };
 
   onInputChange = (event) => {
@@ -20,6 +22,7 @@ class App extends React.Component {
     const value = type === 'checkbox' ? checked : event.target.value;
     this.setState({
       [name]: value,
+      btnChecked: checked,
     });
   };
 
@@ -31,24 +34,24 @@ class App extends React.Component {
     const maxValue = 210;
     const totalSum = parseInt(cardAttr1, 10)
     + parseInt(cardAttr2, 10)
-    + parseInt(cardAttr3, 10) <= maxValue;
+    + parseInt(cardAttr3, 10) > maxValue;
     const maxAttr = 90;
     const minAttr = -1;
-    const maxAttr01 = parseInt(cardAttr1, 10) <= maxAttr;
-    const maxAttr02 = parseInt(cardAttr2, 10) <= maxAttr;
-    const maxAttr03 = parseInt(cardAttr3, 10) <= maxAttr;
-    const minAttr01 = parseInt(cardAttr1, 10) > minAttr;
-    const minAttr02 = parseInt(cardAttr2, 10) > minAttr;
-    const minAttr03 = parseInt(cardAttr3, 10) > minAttr;
+    const maxAttr01 = parseInt(cardAttr1, 10) >= maxAttr;
+    const maxAttr02 = parseInt(cardAttr2, 10) >= maxAttr;
+    const maxAttr03 = parseInt(cardAttr3, 10) >= maxAttr;
+    const minAttr01 = parseInt(cardAttr1, 10) < minAttr;
+    const minAttr02 = parseInt(cardAttr2, 10) < minAttr;
+    const minAttr03 = parseInt(cardAttr3, 10) < minAttr;
 
-    return totalSum && cardsName && maxAttr01
+    return !totalSum && !cardsName && maxAttr01
     && maxAttr02 && maxAttr03 && minAttr01 && minAttr02 && minAttr03;
   };
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
-    const { cardName } = this.state;
-
+    const { cardName, btnChecked } = this.state;
+    const isChecked = !btnChecked;
     this.setState((prevState) => ({
       savedCardName: [...prevState.savedCardName, cardName],
       cardName: '',
@@ -58,12 +61,13 @@ class App extends React.Component {
       cardAttr2: 0,
       cardAttr3: 0,
       cardRare: '',
+      hasTrunfo: isChecked,
     }));
   };
 
   render() {
     const { cardName, cardDescription, cardImage,
-      cardAttr1, cardAttr2, cardAttr3, cardRare, cardTrunfo } = this.state;
+      cardAttr1, cardAttr2, cardAttr3, cardRare, cardTrunfo, hasTrunfo } = this.state;
     return (
       <div>
         <h1>ADICIONE NOVA CARTA</h1>
@@ -78,6 +82,7 @@ class App extends React.Component {
             cardAttr3={ cardAttr3 }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
+            hasTrunfo={ hasTrunfo }
             isSaveButtonDisabled={ this.validateForm() }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
