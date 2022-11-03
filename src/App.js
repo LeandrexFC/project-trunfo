@@ -12,7 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
-    savedCardName: [],
+    savedCards: [],
     hasTrunfo: false,
   };
 
@@ -49,9 +49,11 @@ class App extends React.Component {
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
-    const { cardName, hasTrunfo } = this.state;
+    const { cardName, cardDescription, cardRare, cardImage,
+      cardAttr1, cardAttr2, cardAttr3, hasTrunfo } = this.state;
     this.setState((prevState) => ({
-      savedCardName: [...prevState.savedCardName, cardName],
+      savedCards: [...prevState.savedCards, cardName, cardDescription,
+        cardRare, cardImage, cardAttr1, cardAttr2, cardAttr3],
       cardName: '',
       cardDescription: '',
       cardImage: '',
@@ -65,7 +67,8 @@ class App extends React.Component {
 
   render() {
     const { cardName, cardDescription, cardImage,
-      cardAttr1, cardAttr2, cardAttr3, cardRare, cardTrunfo, hasTrunfo } = this.state;
+      cardAttr1, cardAttr2, cardAttr3, cardRare,
+      cardTrunfo, hasTrunfo, savedCards } = this.state;
     return (
       <div>
         <h1>ADICIONE NOVA CARTA</h1>
@@ -96,6 +99,11 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
           />
         </main>
+        <section>
+          <ul>
+            { savedCards.map((card) => <li key={ card }>{card}</li>)}
+          </ul>
+        </section>
       </div>
     );
   }
